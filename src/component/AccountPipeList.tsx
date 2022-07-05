@@ -1,0 +1,162 @@
+import * as React from 'react'
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
+import { LeadMC } from '../module/lead/LeadMC'
+import { useNavigation } from '@react-navigation/native'
+import { MCTabScreenNavigationProp } from '../navigation/MCNavigator'
+import { formatDate1000 } from '../misc/date'
+import { Body, BodyLight, H3Bold, H4Bold} from './text'
+import { colors } from '../design'
+import { Divider } from '../component/Divider'
+import { Foundation } from '@expo/vector-icons'
+
+
+type Props = {
+  leads: LeadMC[]
+}
+
+/**
+ * Management Consulting.
+ */
+export function AccountPipeList({ leads }: Props) {
+  return (
+    <FlatList<LeadMC>
+      data={leads}
+      renderItem={renderItem}
+      ItemSeparatorComponent={Divider}
+      keyExtractor={(item: LeadMC) => item.id.toString()}
+    />
+  )
+}
+
+const renderItem = ({ item: lead }: { item: LeadMC }) => {
+  return <Item lead={lead} />
+}
+
+function Item({ lead }: { lead: LeadMC }) {
+  const navigation =
+    useNavigation<MCTabScreenNavigationProp<'MyLeadsMCScreen'>>()
+
+  
+  return (
+    <Pressable
+      onPress={() => {
+        navigation.navigate('EditLeadMCScreen')
+      }}
+    >
+      <View style={styles.container}>
+        <View style={styles.titleIconContainer}>
+          <View style={styles.TitleContainer}>
+            <H3Bold>{lead.name}</H3Bold>
+            <H3Bold>
+                {lead.account} - {lead.subAccount}
+            </H3Bold>
+          </View>
+          <View>
+            <Foundation name="pencil" size={12} color="gray" style={styles.pencilIcon}/>
+        </View>
+        </View>
+        <View style={styles.leadsDataContainer}>
+          <View style={styles.leadsData}>
+            <BodyLight style={styles.startDateText}>
+              Start date: <Body>{formatDate1000(lead.start_date)}</Body>
+            </BodyLight>
+            <BodyLight>
+              Revenue: <Body>${lead.actual_revenue}</Body>
+            </BodyLight>
+          </View>
+          <View style={styles.daysInPipe}>
+            <H4Bold>{lead.days_in_pipe} days in pipe</H4Bold>
+          </View>
+          <View style={styles.progressCircle}>
+            <AnimatedCircularProgress
+              size={50}
+              rotation={0}
+              width={4}
+              fill={lead.probability}
+              tintColor="#fc9824"
+              backgroundColor="#f2f2f2">
+              {
+                () => (
+                  <Text>
+                    { lead.probability }%
+                  </Text>
+                )
+              }
+            </AnimatedCircularProgress>
+          </View>
+        </View>
+      </View>
+    </Pressable>
+  )
+}
+
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 25,
+    paddingHorizontal: 15,
+    backgroundColor: colors.white,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    width: '100%'
+  },
+  startDateText: {
+    marginTop: 6,
+    marginBottom: 2
+  },
+  progressCircle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    width: '38%'
+  },
+  daysInPipe: {
+    width: '22%',
+    height: 40,
+    marginBottom: 5,
+    marginRight: 10,
+    backgroundColor: colors.blauFosc,
+    padding: 10,
+    borderRadius: 5,
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  leadsData: {
+    width: '40%',
+    marginRight: 40,
+  },
+  leadsDataContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end'
+  },
+  titleIconContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    width: '100%'
+  },
+  TitleContainer:{
+    width: '90%',
+    marginRight: 10
+  },
+  rightIcon:{
+    width: '10%'
+  },
+  pencilIcon: {
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '10%',
+    marginTop: 10,
+    borderRadius: 100,
+    backgroundColor: colors.BGtitle,
+    borderColor: colors.grocCorp,
+    borderWidth: 1,
+    paddingLeft: 7,
+    paddingRight: 16,
+    paddingTop: 5,
+    paddingBottom: 6
+  }
+})
