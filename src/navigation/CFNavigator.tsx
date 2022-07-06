@@ -166,7 +166,7 @@ function CFTabNavigator() {
               ),
             }}
           />
-          <Tab.Screen
+          {/* <Tab.Screen
             name="SettingsScreen"
             component={SettingsScreen}
             options={{
@@ -175,7 +175,7 @@ function CFTabNavigator() {
                 <FontAwesome5 name="cog" size={20} color={color} />
               ),
             }}
-          />
+          /> */}
         </Tab.Navigator>
       </SideMenu>
   )

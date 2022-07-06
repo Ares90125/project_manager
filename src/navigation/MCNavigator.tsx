@@ -193,7 +193,7 @@ function MCTabNavigator() {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="SettingsScreen"
         component={SettingsScreen}
         options={{
@@ -202,7 +202,7 @@ function MCTabNavigator() {
             <FontAwesome5 name="cog" size={20} color={color} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
     </SideMenu>
   )
