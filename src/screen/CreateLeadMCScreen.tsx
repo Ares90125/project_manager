@@ -1,17 +1,27 @@
 import * as React from 'react'
-import { ScrollView, StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native'
+import { Alert, ScrollView, StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native'
 import { BodyLight, H2BoldWhite, BodyLightWhite, H3BoldGray } from '../component/text'
 import { MCStackScreenProps } from '../navigation/MCNavigator'
 import { Picker } from '@react-native-picker/picker';
 import Checkbox from 'expo-checkbox';
 import { colors } from '../design'
+import { useAccounts } from '../module/account/useAccounts'
+import { isError, isLoading } from '../misc/result'
+import { ProgressScreen } from '../component/Progress'
 
 export function CreateLeadMCScreen({}: MCStackScreenProps<'CreateLeadMCScreen'>) {
-
+  const accounts = useAccounts();
   const [isChecked, setChecked] = React.useState(false);
   const [selectedLanguage, setSelectedLanguage] = React.useState();
+  if (isLoading(accounts)) {
+    return <ProgressScreen />
+  }
 
-
+  if (isError(accounts)) {
+    Alert.alert('Error', accounts.message)
+    return null
+  }
+  console.log(accounts);
   return (
   <ScrollView>
   <View style={styles.container}>

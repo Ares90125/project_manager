@@ -97,9 +97,6 @@ const Tab = createBottomTabNavigator<CFTabParamList>()
 function CFTabNavigator() {
   const [isOpen,  setIsopen] = React.useState(false);
   return (
-    <ScrollView
-      showsHorizontalScrollIndicator={false}
-    >
       <SideMenu menu={SideMenuContent({type:true})}  isOpen={isOpen} onChange={()=>{setIsopen(!isOpen);}} openMenuOffset={Dimensions.get('window').width*0.2}>
         <Tab.Navigator
         screenOptions={{
@@ -169,6 +166,5 @@ function CFTabNavigator() {
           />
         </Tab.Navigator>
       </SideMenu>
-    </ScrollView>
   )
 }
