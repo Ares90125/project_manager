@@ -28,6 +28,7 @@ import { Dimensions } from 'react-native';
 import { colors } from '../design'
 import SideMenuContent from './component/SideMenuContent';
 import React from 'react'
+import { LinearGradient } from 'expo-linear-gradient'
 
 type MCStackParamList = {
   MCTabNavigator: NavigatorScreenParams<MCTabParamList> | undefined
@@ -113,13 +114,25 @@ function MCTabNavigator() {
     <SideMenu menu={SideMenuContent({type:false})}  isOpen={isOpen} onChange={()=>{setIsopen(!isOpen);}} openMenuOffset={Dimensions.get('window').width*0.2}>
     <Tab.Navigator
       screenOptions={{
+
         tabBarActiveTintColor: '#fc9824',
         tabBarLabelPosition:'below-icon',
         headerTitleAlign:'center',
         headerTitleStyle:{
-          color:'white'
+          color:'white',
+          fontSize:18,
+          textTransform:'uppercase'
         },
+        headerBackground: ()=>
+          <LinearGradient
+            colors={['#223346', '#76848F']}
+            style={{ flex: 1 }}
+            start={{x: 0, y: 0}}
+            end={{x: 0, y: 40}}
+          />,
         headerStyle:{
+          flexDirection: 'column',
+          height:40,
           backgroundColor:'#223346',
           display:'flex',
           justifyContent:'center',
@@ -135,6 +148,7 @@ function MCTabNavigator() {
         name="MyLeadsMCScreen"
         component={MyLeadsMCScreen}
         options={({ navigation }: MCTabScreenProps<'MyLeadsMCScreen'>) => ({
+          title : 'My Leads',
           tabBarLabel: config.enableDebugFeatures ? 'My Leads MC' : 'My Leads',
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="bullseye" size={20} color={color} />

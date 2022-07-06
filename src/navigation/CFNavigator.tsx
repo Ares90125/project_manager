@@ -25,6 +25,7 @@ import { colors } from '../design'
 import SideMenuContent from './component/SideMenuContent';
 import React from 'react'
 import { NavigationButtonCreate } from './component/NavigationButtonCreate'
+import { LinearGradient } from 'expo-linear-gradient'
 
 type CFStackParamList = {
   CFTabNavigator: NavigatorScreenParams<CFTabParamList> | undefined
@@ -104,9 +105,19 @@ function CFTabNavigator() {
           tabBarLabelPosition:'below-icon',
           headerTitleAlign:'center',
           headerTitleStyle:{
-            color:'white'
+            color:'white',
+            fontSize:18,
           },
+          headerBackground: ()=>
+          <LinearGradient
+            colors={['#223346', '#76848F']}
+            style={{ flex: 1 }}
+            start={{x: 0, y: 0}}
+            end={{x: 0, y: 40}}
+          />,
           headerStyle:{
+            flexDirection: 'column',
+            height:40,
             backgroundColor:'#223346',
             display:'flex',
             justifyContent:'center',
@@ -122,6 +133,7 @@ function CFTabNavigator() {
             name="MyLeadsCFScreen"
             component={MyLeadsCFScreen}
             options={({ navigation }: CFTabScreenProps<'MyLeadsCFScreen'>) => ({
+              title: 'My Leads',
               tabBarLabel: config.enableDebugFeatures ? 'My Leads CF' : 'My Leads',
               tabBarIcon: ({ color }) => (
                 <FontAwesome5 name="bullseye" size={20} color={color} />
