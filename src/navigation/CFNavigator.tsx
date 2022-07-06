@@ -20,6 +20,7 @@ import { config } from '../config'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { HeaderButtonCreate } from './component/HeaderButtonCreate'
 
+
 type CFStackParamList = {
   CFTabNavigator: NavigatorScreenParams<CFTabParamList> | undefined
   CreateLeadCFScreen: undefined
@@ -115,6 +116,7 @@ function CFTabNavigator() {
               }}
             />
           ),
+          
         })}
       />
       <Tab.Screen
