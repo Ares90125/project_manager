@@ -12,7 +12,7 @@ export function HeaderButtonCreate({ onPress }: Props) {
   return (
     <PressableOpacity style={styles.createButtonPressable} onPress={onPress}>
       <Row style={styles.createButtonRow}>
-        <FontAwesome5 name="plus" />
+        <FontAwesome5 name="plus" style={{color:'white'}} />
         <Text style={styles.createText}> Create</Text>
       </Row>
     </PressableOpacity>
@@ -21,6 +21,7 @@ export function HeaderButtonCreate({ onPress }: Props) {
 
 const styles = StyleSheet.create({
   createButtonPressable: {
+    color:'white',
     marginRight: 10,
   },
   createButtonRow: {
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
     marginRight: 15
   },
   createText:{
+    color:'white',
     marginBottom: 3
   }
 })

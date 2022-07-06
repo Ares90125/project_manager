@@ -110,7 +110,7 @@ function MCTabNavigator() {
 
   const [isOpen,  setIsopen] = React.useState(false);
   return (
-    <SideMenu menu={SideMenuContent()}  isOpen={isOpen} onChange={()=>{setIsopen(!isOpen);}} openMenuOffset={Dimensions.get('window').width*0.2}>
+    <SideMenu menu={SideMenuContent({type:false})}  isOpen={isOpen} onChange={()=>{setIsopen(!isOpen);}} openMenuOffset={Dimensions.get('window').width*0.2}>
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: '#fc9824',

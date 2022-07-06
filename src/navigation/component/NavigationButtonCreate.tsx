@@ -11,7 +11,7 @@ type Props = {
 export function NavigationButtonCreate({ onPress }: Props) {
   return (
     <PressableOpacity style={styles.createButtonPressable} onPress={onPress}>
-        <FontAwesome5 name="align-justify"  style={styles.createButtonRow} />
+        <FontAwesome5 name="bars"  style={styles.createButtonRow} />
     </PressableOpacity>
   )
 }

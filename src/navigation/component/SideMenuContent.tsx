@@ -1,17 +1,34 @@
 import React, { useState } from 'react'
-import { StyleSheet, Switch, Text, View } from 'react-native'
+import { StyleSheet, Switch, Text, View,Image} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesome5 } from '@expo/vector-icons'
+import { modeStore } from '../../../src/module/mode/ModeStore'
 
-const SideMenuContent = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+type Props = {
+  type: boolean|undefined
+}
+
+const SideMenuContent = ({ type }: Props) => {
+  const [isEnabled, setIsEnabled] = useState(type);
+  const toggleSwitch = () => {
+    if(type==false){
+      modeStore.setMode('CF');
+    }
+    else{
+      modeStore.setMode('MC');
+    }
+    setIsEnabled(previousState => !previousState);
+  }
 
   return (
     <LinearGradient colors={['#223346', '#505f6e', '#76848f']} style={styles.sidebarContainer}>
-      <Text style={{ color: 'white', fontSize: 22, marginTop: 80 }}>
+      {/* <Text style={{ color: 'white', fontSize: 22, marginTop: 80 }}>
         DELTA PARTNERS
-      </Text>
+      </Text> */}
+      <Image
+        style={{ width:'100%', paddingTop: 15,marginTop: 50 }}
+        source={require('../../img/logo.png')}
+      />
       <View style={{ flex: 1, alignItems: 'center', marginTop: 20 }}>
         <Text style={{ color: '#fc9824', fontSize: 14, fontWeight: 'bold', padding: 30 }}>
           MENU
@@ -37,8 +54,8 @@ const SideMenuContent = () => {
         <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold', padding: 20 }}>
           ACC MEMBERS
         </Text>
-        <View style={{ flexDirection: 'row', padding: 10 }}>
-          <FontAwesome5 name="rightfrombracket" size={20} />
+        <View style={{ flexDirection: 'row', padding: 10,display:'flex',justifyContent:'center' }}>
+          <FontAwesome5 name="right-from-bracket" size={20} />
           <Text style={{ color: 'white', fontSize: 12, fontWeight: 'bold', paddingLeft: 5 }}>LOG OUT</Text>
         </View>
       </View>
