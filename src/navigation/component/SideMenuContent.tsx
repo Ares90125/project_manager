@@ -36,7 +36,7 @@ const SideMenuContent = ({ type }: Props) => {
         DELTA PARTNERS
       </Text> */}
       <Image
-        style={{ width:'100%', paddingTop: 15,marginTop: 50 }}
+        style={{ width:152.5,height:8,marginTop: 50,resizeMode: 'stretch',}}
         source={require('../../img/logo.png')}
       />
       <View style={{ flex: 1, alignItems: 'center', marginTop: 20 }}>
