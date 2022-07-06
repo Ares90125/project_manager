@@ -2,7 +2,7 @@ import { httpClient } from '../../api'
 import { Mode } from '../mode/Mode'
 import { AxiosResponse } from 'axios'
 
-type GetQualificationsResponse = {
+export type GetQualificationsResponse = {
   id: number
   name: string
   qualitative: 1

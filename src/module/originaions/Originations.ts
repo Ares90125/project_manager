@@ -1,13 +1,13 @@
 import { httpClient } from '../../api'
 import { AxiosResponse } from 'axios'
 
-type Originations = {
+export type Originations = {
   id: string
   name: string
 }
 
-export class QualificationApi {
-  static getQualifications(): Promise<Originations[]> {
+export class OriginationsApi {
+  static getOriginations(): Promise<Originations[]> {
     return httpClient
       .get(`/api/miscellaneous/originations`)
       .then((response: AxiosResponse<Originations[]>) => {

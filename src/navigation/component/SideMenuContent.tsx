@@ -3,6 +3,7 @@ import { StyleSheet, Switch, Text, View,Image} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesome5 } from '@expo/vector-icons'
 import { modeStore } from '../../../src/module/mode/ModeStore'
+import CustomSwitch from '../../component/CustomSwitch';
 
 type Props = {
   type: boolean|undefined
@@ -10,6 +11,15 @@ type Props = {
 
 const SideMenuContent = ({ type }: Props) => {
   const [isEnabled, setIsEnabled] = useState(type);
+  const onSelectSwitch = (index:boolean) => {
+    if(type==false){
+      modeStore.setMode('CF');
+    }
+    else{
+      modeStore.setMode('MC');
+    }
+    setIsEnabled(previousState => !previousState);
+  };
   const toggleSwitch = () => {
     if(type==false){
       modeStore.setMode('CF');
@@ -38,14 +48,22 @@ const SideMenuContent = ({ type }: Props) => {
             ? { color: '#7b8994', fontSize: 18, fontWeight: 'bold', paddingHorizontal: 10 }
             : { color: 'white', fontSize: 18, fontWeight: 'bold', paddingHorizontal: 10 }
             }>PIPE MC</Text>
-          <Switch
+            <View style={{alignItems: 'center', margin: 20}}>
+              <CustomSwitch
+                selectionMode={isEnabled!}
+                roundCorner={true}
+                onSelectSwitch={onSelectSwitch}
+                selectionColor={'#ffffff'}
+              />
+            </View>
+          {/* <Switch
             trackColor={{ false: "#ffffff", true: "#ffffff" }}
             thumbColor={isEnabled ? "#ffffff" : "#ffffff"}
             ios_backgroundColor="#ffffff"
             onValueChange={toggleSwitch}
             value={isEnabled}
             style={{ height: 30 }}
-          />
+          /> */}
           <Text style={!isEnabled
             ? { color: '#7b8994', fontSize: 18, fontWeight: 'bold', paddingHorizontal: 10 }
             : { color: 'white', fontSize: 18, fontWeight: 'bold', paddingHorizontal: 10 }
@@ -55,7 +73,7 @@ const SideMenuContent = ({ type }: Props) => {
           ACC MEMBERS
         </Text>
         <View style={{ flexDirection: 'row', padding: 10,display:'flex',justifyContent:'center' }}>
-          <FontAwesome5 name="right-from-bracket" size={20} />
+          <FontAwesome5 name="sign-out-alt" size={15} color='#223346' />
           <Text style={{ color: 'white', fontSize: 12, fontWeight: 'bold', paddingLeft: 5 }}>LOG OUT</Text>
         </View>
       </View>
