@@ -10,7 +10,6 @@ type Props = {
   type: boolean|undefined,
   onPress: () => void
 }
-
 const SideMenuContent = ({ type,onPress }: Props) => {
   const [isEnabled, setIsEnabled] = useState(type);
   const onSelectSwitch = (index:boolean) => {

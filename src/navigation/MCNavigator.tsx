@@ -113,7 +113,7 @@ function MCTabNavigator({ navigation }:Props) {
   
   const [isOpen,  setIsopen] = React.useState(drawerStore.open);
   return (
-    <SideMenu menu={SideMenuContent({type:true, onPress:()=>{navigation.navigate('AccountMembersScreen')}})}  isOpen={isOpen} onChange={()=>{setIsopen(!isOpen);}} openMenuOffset={350}>
+    <SideMenu menu={SideMenuContent({type:false, onPress:()=>{navigation.navigate('AccountMembersScreen')}})}  isOpen={isOpen} onChange={()=>{setIsopen(!isOpen);}} openMenuOffset={350}>
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: '#fc9824',
