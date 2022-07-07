@@ -109,9 +109,7 @@ export type MCTabScreenNavigationProp<Screen extends keyof MCTabParamList> =
 const Tab = createBottomTabNavigator<MCTabParamList>()
 const isOpen=false;
 function MCTabNavigator() {
-  const [rootname,  setRoute] = React.useState<string|undefined>(undefined);
-  if(drawerStore.routename='MyLeadsMCScreen')
-  setRoute("MyLeadsMCScreen");
+
   const [isOpen,  setIsopen] = React.useState(drawerStore.open);
   return (
     <SideMenu menu={SideMenuContent({type:false})}  isOpen={isOpen} onChange={()=>{setIsopen(!isOpen);}} openMenuOffset={350}>

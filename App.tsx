@@ -10,7 +10,6 @@ import { modeStore } from './src/module/mode/ModeStore'
 
 export default function App() {
   useInitUser()
-
   return (
     <SafeAreaProvider>
       <NavigationContainer>
