@@ -31,6 +31,7 @@ import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import { drawerStore } from '../../src/module/mode/DrawerStore'
 
+
 type MCStackParamList = {
   MCTabNavigator: NavigatorScreenParams<MCTabParamList> | undefined
   CreateLeadMCScreen: undefined
@@ -222,5 +223,3 @@ function MCTabNavigator({ navigation }:Props) {
     </SideMenu>
   )
 }
-
-

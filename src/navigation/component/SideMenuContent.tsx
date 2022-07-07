@@ -5,6 +5,7 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import { modeStore } from '../../../src/module/mode/ModeStore'
 import CustomSwitch from '../../component/CustomSwitch';
 import { drawerStore } from '../../module/mode/DrawerStore';
+import { userStore } from '../../module/user/UserStore';
 
 type Props = {
   type: boolean|undefined,
@@ -77,7 +78,7 @@ const SideMenuContent = ({ type,onPress }: Props) => {
         </Text>
         <View style={{ flexDirection: 'row', padding: 10,display:'flex',justifyContent:'center' }}>
           <FontAwesome5 name="sign-out-alt" size={15} color='#223346' />
-          <Text style={{ color: 'white', fontSize: 12, fontWeight: 'bold', paddingLeft: 5 }}>LOG OUT</Text>
+          <Text style={{ color: 'white', fontSize: 12, fontWeight: 'bold', paddingLeft: 5 }} onPress={()=>{userStore.logout()}}>LOG OUT</Text>
         </View>
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
