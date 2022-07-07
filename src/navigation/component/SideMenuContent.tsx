@@ -7,10 +7,11 @@ import CustomSwitch from '../../component/CustomSwitch';
 import { drawerStore } from '../../module/mode/DrawerStore';
 
 type Props = {
-  type: boolean|undefined
+  type: boolean|undefined,
+  onPress: () => void
 }
 
-const SideMenuContent = ({ type }: Props) => {
+const SideMenuContent = ({ type,onPress }: Props) => {
   const [isEnabled, setIsEnabled] = useState(type);
   const onSelectSwitch = (index:boolean) => {
     drawerStore.setOpen(true);
@@ -72,7 +73,7 @@ const SideMenuContent = ({ type }: Props) => {
             : { color: 'white', fontSize: 18, fontWeight: 'bold', paddingHorizontal: 10 }
             }>PIPE FC</Text>
         </View>
-        <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold', padding: 20 }}>
+        <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold', padding: 20 }} onPress={onPress}>
           ACC MEMBERS
         </Text>
         <View style={{ flexDirection: 'row', padding: 10,display:'flex',justifyContent:'center' }}>

@@ -96,11 +96,13 @@ export type CFTabScreenNavigationProp<Screen extends keyof CFTabParamList> =
   CFTabScreenProps<Screen>['navigation']
 
 const Tab = createBottomTabNavigator<CFTabParamList>()
-
-function CFTabNavigator() {
+type Props = {
+  navigation: any,
+}
+function CFTabNavigator({ navigation }:Props) {
   const [isOpen,  setIsopen] = React.useState(drawerStore.open);
   return (
-      <SideMenu menu={SideMenuContent({type:true})}  isOpen={isOpen} onChange={()=>{setIsopen(!isOpen);}} openMenuOffset={350}>
+      <SideMenu menu={SideMenuContent({type:true, onPress:()=>{navigation.navigate('AccountMembersScreen')}})}  isOpen={isOpen} onChange={()=>{setIsopen(!isOpen);}} openMenuOffset={350}>
         <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: '#fc9824',
@@ -163,6 +165,13 @@ function CFTabNavigator() {
             options={{
               title: 'Pipe Changes (Log)',
               tabBarLabel: 'Log',
+              headerLeft: () => (
+                <NavigationButtonCreate
+                  onPress={() => {
+                    setIsopen(true);
+                  }}
+                />
+              ),
               tabBarIcon: ({ color }) => (
                 <FontAwesome5 name="list-ul" size={20} color={color} />
               ),
