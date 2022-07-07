@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesome5 } from '@expo/vector-icons'
 import { modeStore } from '../../../src/module/mode/ModeStore'
 import CustomSwitch from '../../component/CustomSwitch';
+import { drawerStore } from '../../module/mode/DrawerStore';
 
 type Props = {
   type: boolean|undefined
@@ -12,6 +13,7 @@ type Props = {
 const SideMenuContent = ({ type }: Props) => {
   const [isEnabled, setIsEnabled] = useState(type);
   const onSelectSwitch = (index:boolean) => {
+    drawerStore.setOpen(true);
     if(type==false){
       modeStore.setMode('CF');
     }
@@ -21,6 +23,7 @@ const SideMenuContent = ({ type }: Props) => {
     setIsEnabled(previousState => !previousState);
   };
   const toggleSwitch = () => {
+    
     if(type==false){
       modeStore.setMode('CF');
     }

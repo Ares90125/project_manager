@@ -29,6 +29,7 @@ import { colors } from '../design'
 import SideMenuContent from './component/SideMenuContent';
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
+import { drawerStore } from '../../src/module/mode/DrawerStore'
 
 type MCStackParamList = {
   MCTabNavigator: NavigatorScreenParams<MCTabParamList> | undefined
@@ -108,13 +109,14 @@ export type MCTabScreenNavigationProp<Screen extends keyof MCTabParamList> =
 const Tab = createBottomTabNavigator<MCTabParamList>()
 const isOpen=false;
 function MCTabNavigator() {
-
-  const [isOpen,  setIsopen] = React.useState(false);
+  const [rootname,  setRoute] = React.useState<string|undefined>(undefined);
+  if(drawerStore.routename='MyLeadsMCScreen')
+  setRoute("MyLeadsMCScreen");
+  const [isOpen,  setIsopen] = React.useState(drawerStore.open);
   return (
-    <SideMenu menu={SideMenuContent({type:false})}  isOpen={isOpen} onChange={()=>{setIsopen(!isOpen);}} openMenuOffset={Dimensions.get('window').width*0.2}>
+    <SideMenu menu={SideMenuContent({type:false})}  isOpen={isOpen} onChange={()=>{setIsopen(!isOpen);}} openMenuOffset={350}>
     <Tab.Navigator
       screenOptions={{
-
         tabBarActiveTintColor: '#fc9824',
         tabBarLabelPosition:'below-icon',
         headerTitleAlign:'center',
@@ -176,6 +178,13 @@ function MCTabNavigator() {
         name="MyAccountsScreen"
         component={MyAccountsScreen}
         options={{
+          headerLeft: () => (
+            <NavigationButtonCreate
+              onPress={() => {
+                setIsopen(true);
+              }}
+            />
+          ),
           tabBarLabel: 'My Accounts',
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="city" size={20} color={color} />
@@ -186,6 +195,13 @@ function MCTabNavigator() {
         name="ChangelogScreen"
         component={ChangelogScreen}
         options={{
+          headerLeft: () => (
+            <NavigationButtonCreate
+              onPress={() => {
+                setIsopen(true);
+              }}
+            />
+          ),
           title: 'Pipe Changes (Log)',
           tabBarLabel: 'Log',
           tabBarIcon: ({ color }) => (

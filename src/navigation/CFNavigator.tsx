@@ -26,6 +26,8 @@ import SideMenuContent from './component/SideMenuContent';
 import React from 'react'
 import { NavigationButtonCreate } from './component/NavigationButtonCreate'
 import { LinearGradient } from 'expo-linear-gradient'
+import { drawerStore } from '../module/mode/DrawerStore'
+
 
 type CFStackParamList = {
   CFTabNavigator: NavigatorScreenParams<CFTabParamList> | undefined
@@ -96,9 +98,9 @@ export type CFTabScreenNavigationProp<Screen extends keyof CFTabParamList> =
 const Tab = createBottomTabNavigator<CFTabParamList>()
 
 function CFTabNavigator() {
-  const [isOpen,  setIsopen] = React.useState(false);
+  const [isOpen,  setIsopen] = React.useState(drawerStore.open);
   return (
-      <SideMenu menu={SideMenuContent({type:true})}  isOpen={isOpen} onChange={()=>{setIsopen(!isOpen);}} openMenuOffset={Dimensions.get('window').width*0.2}>
+      <SideMenu menu={SideMenuContent({type:true})}  isOpen={isOpen} onChange={()=>{setIsopen(!isOpen);}} openMenuOffset={350}>
         <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: '#fc9824',
